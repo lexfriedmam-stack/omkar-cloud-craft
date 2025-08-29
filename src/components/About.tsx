@@ -1,5 +1,5 @@
 import { GraduationCap, Award, Users, Zap } from 'lucide-react';
-import omkarHeadshot from '@/assets/omkar-headshot.jpg';
+import omkarHeadshot from '@/assets/omkar-profile.jpg';
 
 const About = () => {
   const highlights = [
