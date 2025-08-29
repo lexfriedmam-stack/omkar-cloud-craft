@@ -1,5 +1,7 @@
 import { ExternalLink, Github, Eye, Brain, BarChart3, Users } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import project1Image from '@/assets/project-1.png';
+import project2Image from '@/assets/project-2.png';
 
 const Portfolio = () => {
   const projects = [
@@ -10,7 +12,7 @@ const Portfolio = () => {
       technologies: ['OpenCV', 'CNN', 'Raspberry Pi', 'Python', 'IR Sensors', 'Computer Vision'],
       category: 'AI & IoT',
       icon: <Brain className="h-6 w-6" />,
-      image: '/placeholder-project-1.jpg',
+      image: project1Image,
       outcomes: [
         'Automated attendance tracking with 99.2% accuracy',
         'Real-time temperature monitoring and alerts',
@@ -26,7 +28,7 @@ const Portfolio = () => {
       technologies: ['Deep Learning', 'Machine Learning', 'SDSM', 'ANN', 'WRF', 'Python', 'TensorFlow', 'Statistical Analysis'],
       category: 'Data Science',
       icon: <BarChart3 className="h-6 w-6" />,
-      image: '/placeholder-project-2.jpg',
+      image: project2Image,
       outcomes: [
         'Improved temperature prediction accuracy by 25%',
         'Comprehensive model comparison and analysis',
@@ -79,10 +81,20 @@ const Portfolio = () => {
               {/* Project Image */}
               <div className={`${index % 2 === 1 ? 'lg:col-start-2' : ''}`}>
                 <div className="glass-card p-4 hover-lift">
-                  <div className={`h-64 lg:h-80 rounded-lg bg-gradient-to-br ${project.gradient} flex items-center justify-center`}>
-                    <div className="text-white/20 text-8xl">
-                      {project.icon}
-                    </div>
+                  <div className="h-64 lg:h-80 rounded-lg overflow-hidden">
+                    {project.image && typeof project.image === 'string' && project.image.startsWith('/') ? (
+                      <div className={`h-full w-full bg-gradient-to-br ${project.gradient} flex items-center justify-center`}>
+                        <div className="text-white/20 text-8xl">
+                          {project.icon}
+                        </div>
+                      </div>
+                    ) : (
+                      <img 
+                        src={project.image} 
+                        alt={project.title}
+                        className="w-full h-full object-cover"
+                      />
+                    )}
                   </div>
                 </div>
               </div>
