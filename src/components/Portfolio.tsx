@@ -62,9 +62,15 @@ const Portfolio = () => {
   };
 
   return (
-    <section id="portfolio" className="py-20 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-16">
+    <section id="portfolio" className="py-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+      {/* Background decoration */}
+      <div className="absolute inset-0 opacity-5">
+        <div className="absolute top-10 right-20 w-72 h-72 bg-accent-bright rounded-full blur-3xl animate-float"></div>
+        <div className="absolute bottom-10 left-20 w-96 h-96 bg-primary-light rounded-full blur-3xl animate-float" style={{ animationDelay: '4s' }}></div>
+      </div>
+
+      <div className="max-w-7xl mx-auto relative z-10">
+        <div className="text-center mb-16 animate-fade-in-up">
           <h2 className="text-4xl md:text-5xl font-bold mb-6 hero-text">Portfolio</h2>
           <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
             Showcasing innovative projects that demonstrate technical expertise and real-world impact
@@ -80,48 +86,73 @@ const Portfolio = () => {
               }`}
             >
               {/* Project Image */}
-              <div className={`${index % 2 === 1 ? 'lg:col-start-2' : ''}`}>
-                <div className="glass-card p-4 hover-lift">
-                  <div className="h-64 lg:h-80 rounded-lg overflow-hidden">
+              <div className={`${index % 2 === 1 ? 'lg:col-start-2' : ''} animate-fade-in-scale`} style={{ animationDelay: `${index * 0.3}s` }}>
+                <div className="glass-card p-4 hover-lift morph-card group">
+                  <div className="h-64 lg:h-80 rounded-lg overflow-hidden relative">
                     {project.image && typeof project.image === 'string' && project.image.startsWith('/') ? (
-                      <div className={`h-full w-full bg-gradient-to-br ${project.gradient} flex items-center justify-center`}>
-                        <div className="text-white/20 text-8xl">
+                      <div className={`h-full w-full bg-gradient-to-br ${project.gradient} flex items-center justify-center group-hover:scale-110 transition-transform duration-500`}>
+                        <div className="text-white/20 text-8xl group-hover:text-white/40 transition-colors duration-500">
                           {project.icon}
                         </div>
                       </div>
                     ) : (
-                      <img 
-                        src={project.image} 
-                        alt={project.title}
-                        className="w-full h-full object-cover"
-                      />
+                      <div className="relative overflow-hidden h-full w-full">
+                        <img 
+                          src={project.image} 
+                          alt={project.title}
+                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                        />
+                        <div className={`absolute inset-0 bg-gradient-to-br ${project.gradient} opacity-0 group-hover:opacity-20 transition-opacity duration-500`}></div>
+                      </div>
                     )}
+                    
+                    {/* Overlay with quick actions */}
+                    <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-4">
+                      <Button
+                        size="sm"
+                        className="bg-white/20 backdrop-blur-sm text-white border-white/30 hover:bg-white/30"
+                      >
+                        <Eye className="mr-2 h-4 w-4" />
+                        View
+                      </Button>
+                      <Button
+                        size="sm"
+                        className="bg-white/20 backdrop-blur-sm text-white border-white/30 hover:bg-white/30"
+                      >
+                        <ExternalLink className="mr-2 h-4 w-4" />
+                        Demo
+                      </Button>
+                    </div>
                   </div>
                 </div>
               </div>
 
               {/* Project Content */}
-              <div className={`${index % 2 === 1 ? 'lg:col-start-1 lg:row-start-1' : ''}`}>
+              <div className={`${index % 2 === 1 ? 'lg:col-start-1 lg:row-start-1' : ''} animate-slide-in-left`} style={{ animationDelay: `${index * 0.3 + 0.2}s` }}>
                 <div className="space-y-6">
-                  <div className="flex items-center gap-3">
-                    <div className={`p-3 rounded-lg bg-gradient-to-br ${project.gradient} text-white`}>
+                  <div className="flex items-center gap-3 animate-bounce-in" style={{ animationDelay: `${index * 0.3 + 0.4}s` }}>
+                    <div className={`p-3 rounded-lg bg-gradient-to-br ${project.gradient} text-white scale-on-hover`}>
                       {project.icon}
                     </div>
                     <span className="skill-badge">{project.category}</span>
                   </div>
 
-                  <div>
-                    <h3 className="text-2xl lg:text-3xl font-bold mb-4">{project.title}</h3>
+                  <div className="animate-fade-in-up" style={{ animationDelay: `${index * 0.3 + 0.6}s` }}>
+                    <h3 className="text-2xl lg:text-3xl font-bold mb-4 hero-text">{project.title}</h3>
                     <p className="text-lg text-muted-foreground mb-4">{project.description}</p>
                     <p className="text-muted-foreground">{project.longDescription}</p>
                   </div>
 
                   {/* Technologies */}
-                  <div>
+                  <div className="animate-slide-in-right" style={{ animationDelay: `${index * 0.3 + 0.8}s` }}>
                     <h4 className="font-semibold mb-3 text-primary">Technologies Used:</h4>
                     <div className="flex flex-wrap gap-2">
-                      {project.technologies.map((tech) => (
-                        <span key={tech} className="skill-badge text-sm">
+                      {project.technologies.map((tech, techIndex) => (
+                        <span 
+                          key={tech} 
+                          className="skill-badge text-sm"
+                          style={{ animationDelay: `${index * 0.3 + 1 + techIndex * 0.05}s` }}
+                        >
                           {tech}
                         </span>
                       ))}
@@ -129,12 +160,16 @@ const Portfolio = () => {
                   </div>
 
                   {/* Outcomes */}
-                  <div>
+                  <div className="animate-fade-in-up" style={{ animationDelay: `${index * 0.3 + 1.2}s` }}>
                     <h4 className="font-semibold mb-3 text-primary">Key Outcomes:</h4>
                     <ul className="space-y-2">
                       {project.outcomes.map((outcome, outcomeIndex) => (
-                        <li key={outcomeIndex} className="flex items-start gap-2 text-muted-foreground">
-                          <div className="w-1.5 h-1.5 rounded-full bg-primary mt-2 flex-shrink-0"></div>
+                        <li 
+                          key={outcomeIndex} 
+                          className="flex items-start gap-2 text-muted-foreground animate-slide-in-left"
+                          style={{ animationDelay: `${index * 0.3 + 1.4 + outcomeIndex * 0.1}s` }}
+                        >
+                          <div className="w-1.5 h-1.5 rounded-full bg-primary mt-2 flex-shrink-0 animate-pulse-glow"></div>
                           <span className="text-sm">{outcome}</span>
                         </li>
                       ))}
@@ -142,17 +177,17 @@ const Portfolio = () => {
                   </div>
 
                   {/* Actions */}
-                  <div className="flex flex-col sm:flex-row gap-4">
+                  <div className="flex flex-col sm:flex-row gap-4 animate-bounce-in" style={{ animationDelay: `${index * 0.3 + 1.6}s` }}>
                     <Button
                       onClick={() => viewProject(project.title)}
-                      className={`bg-gradient-to-r ${project.gradient} text-white hover:opacity-90 transition-opacity`}
+                      className={`btn-primary bg-gradient-to-r ${project.gradient} text-white hover:opacity-90 transition-opacity`}
                     >
                       <Eye className="mr-2 h-4 w-4" />
                       View Details
                     </Button>
                     <Button
                       variant="outline"
-                      className="border-primary text-primary hover:bg-primary hover:text-primary-foreground"
+                      className="border-primary text-primary hover:bg-primary hover:text-primary-foreground scale-on-hover"
                     >
                       <Github className="mr-2 h-4 w-4" />
                       Source Code

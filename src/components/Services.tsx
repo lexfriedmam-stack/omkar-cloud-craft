@@ -1,4 +1,4 @@
-import { Video, Camera, Globe, Brain, ArrowRight } from 'lucide-react';
+import { Video, Camera, Globe, Brain, ArrowRight, MessageSquare, Mail } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const Services = () => {
@@ -65,9 +65,15 @@ const Services = () => {
   };
 
   return (
-    <section id="services" className="py-20 px-4 sm:px-6 lg:px-8 bg-muted/20">
-      <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-16">
+    <section id="services" className="py-20 px-4 sm:px-6 lg:px-8 bg-muted/20 relative overflow-hidden">
+      {/* Background decoration */}
+      <div className="absolute inset-0 opacity-5">
+        <div className="absolute top-20 left-10 w-64 h-64 bg-primary rounded-full blur-3xl animate-float"></div>
+        <div className="absolute bottom-20 right-10 w-80 h-80 bg-accent-bright rounded-full blur-3xl animate-float" style={{ animationDelay: '3s' }}></div>
+      </div>
+
+      <div className="max-w-7xl mx-auto relative z-10">
+        <div className="text-center mb-16 animate-fade-in-up">
           <h2 className="text-4xl md:text-5xl font-bold mb-6 hero-text">Services</h2>
           <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
             Beyond technical expertise, I offer creative and strategic services to help businesses grow
@@ -76,13 +82,17 @@ const Services = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {services.map((service, index) => (
-            <div key={index} className="glass-card hover-lift p-6 cursor-pointer group">
+            <div 
+              key={index} 
+              className="glass-card hover-lift p-6 cursor-pointer group morph-card service-card animate-fade-in-up"
+              style={{ animationDelay: `${index * 0.2}s` }}
+            >
               <div className="flex items-start gap-4 mb-6">
-                <div className={`p-4 rounded-xl bg-gradient-to-br ${service.gradient} text-white shadow-lg`}>
+                <div className={`p-4 rounded-xl bg-gradient-to-br ${service.gradient} text-white shadow-lg group-hover:scale-110 transition-transform duration-300`}>
                   {service.icon}
                 </div>
                 <div>
-                  <h3 className="text-2xl font-bold mb-2">{service.title}</h3>
+                  <h3 className="text-2xl font-bold mb-2 group-hover:text-primary transition-colors">{service.title}</h3>
                   <p className="text-muted-foreground">{service.description}</p>
                 </div>
               </div>
@@ -91,8 +101,12 @@ const Services = () => {
                 <h4 className="font-semibold mb-3 text-primary">What's Included:</h4>
                 <ul className="space-y-2">
                   {service.features.map((feature, featureIndex) => (
-                    <li key={featureIndex} className="flex items-center gap-2 text-sm text-muted-foreground">
-                      <div className="w-1.5 h-1.5 rounded-full bg-primary"></div>
+                    <li 
+                      key={featureIndex} 
+                      className="flex items-center gap-2 text-sm text-muted-foreground animate-slide-in-left"
+                      style={{ animationDelay: `${index * 0.2 + featureIndex * 0.05}s` }}
+                    >
+                      <div className={`w-1.5 h-1.5 rounded-full bg-gradient-to-r ${service.gradient}`}></div>
                       {feature}
                     </li>
                   ))}
@@ -102,8 +116,9 @@ const Services = () => {
               <Button
                 onClick={scrollToContact}
                 variant="outline"
-                className="w-full group border-primary text-primary hover:bg-primary hover:text-primary-foreground"
+                className={`w-full group border-primary text-primary hover:bg-primary hover:text-primary-foreground bg-gradient-to-r ${service.gradient} bg-clip-text text-transparent hover:text-white transition-all duration-300 scale-on-hover`}
               >
+                <MessageSquare className="mr-2 h-4 w-4" />
                 Get Started
                 <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
               </Button>
@@ -112,9 +127,9 @@ const Services = () => {
         </div>
 
         {/* CTA Section */}
-        <div className="mt-16 text-center">
-          <div className="glass-card p-8 max-w-4xl mx-auto">
-            <h3 className="text-2xl font-bold mb-4">Ready to Work Together?</h3>
+        <div className="mt-16 text-center animate-fade-in-up" style={{ animationDelay: '1s' }}>
+          <div className="glass-card p-8 max-w-4xl mx-auto hover-lift">
+            <h3 className="text-2xl font-bold mb-4 hero-text">Ready to Work Together?</h3>
             <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
               Whether you need technical consulting, creative services, or a combination of both, 
               I'm here to help bring your vision to life with professional expertise and attention to detail.
@@ -122,14 +137,15 @@ const Services = () => {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button
                 onClick={scrollToContact}
-                className="hero-gradient text-white font-semibold px-8 py-3 glow-on-hover"
+                className="btn-primary hero-gradient text-white font-semibold px-8 py-3 glow-on-hover"
               >
+                <Mail className="mr-2 h-5 w-5" />
                 Start a Project
               </Button>
               <Button
                 variant="outline"
                 onClick={scrollToContact}
-                className="border-primary text-primary hover:bg-primary hover:text-primary-foreground px-8 py-3"
+                className="border-primary text-primary hover:bg-primary hover:text-primary-foreground px-8 py-3 scale-on-hover"
               >
                 Schedule Consultation
               </Button>
