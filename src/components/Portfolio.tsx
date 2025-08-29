@@ -2,6 +2,7 @@ import { ExternalLink, Github, Eye, Brain, BarChart3, Users } from 'lucide-react
 import { Button } from '@/components/ui/button';
 import project1Image from '@/assets/project-1.png';
 import project2Image from '@/assets/project-2.png';
+import project3Image from '@/assets/project-3.png';
 
 const Portfolio = () => {
   const projects = [
@@ -44,7 +45,7 @@ const Portfolio = () => {
       technologies: ['SQL', 'MySQL', 'Data Analysis', 'Business Intelligence', 'Python', 'Pandas', 'Visualization'],
       category: 'Business Intelligence',
       icon: <Users className="h-6 w-6" />,
-      image: '/placeholder-project-3.jpg',
+      image: project3Image,
       outcomes: [
         'Identified top-performing sales channels',
         'Reduced reporting time by 60%',
