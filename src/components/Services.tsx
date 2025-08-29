@@ -76,7 +76,7 @@ const Services = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {services.map((service, index) => (
-            <div key={index} className="service-card">
+            <div key={index} className="glass-card hover-lift p-6 cursor-pointer group">
               <div className="flex items-start gap-4 mb-6">
                 <div className={`p-4 rounded-xl bg-gradient-to-br ${service.gradient} text-white shadow-lg`}>
                   {service.icon}

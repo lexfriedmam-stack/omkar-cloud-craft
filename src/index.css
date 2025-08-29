@@ -144,7 +144,7 @@
   }
 
   .service-card {
-    @apply glass-card hover-lift p-6 cursor-pointer group;
+    @apply p-6 cursor-pointer;
   }
 
   /* Animations */
