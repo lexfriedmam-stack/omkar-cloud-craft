@@ -1,6 +1,6 @@
 import { Button } from '@/components/ui/button';
 import { Download, Mail, Linkedin, Github, Eye } from 'lucide-react';
-import omkarHeadshot from '@/assets/omkar-profile.jpg';
+import omkarHeadshot from '@/assets/omkar-headshot.jpg';
 
 const Hero = () => {
   const scrollToSection = (sectionId: string) => {
